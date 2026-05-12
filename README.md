@@ -34,9 +34,3 @@ Layihədə **Dependency Injection** və **Service-Oriented Architecture** prinsi
 - **Frontend:** Bootstrap 5, Bootstrap Icons, HTML5, CSS3
 - **Data:** JSON Serialization (System.Text.Json)
 - **Tooling:** Visual Studio 2022, .NET SDK 6.0+
-
-## 🚀 Quraşdırma və İstifadə
-
-1. **Repository-ni kopyalayın:**
-   ```bash
-   git clone [https://github.com/username/layihe-adi.git](https://github.com/username/layihe-adi.git)
