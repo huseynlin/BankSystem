@@ -28,9 +28,10 @@ Layihədə **Dependency Injection** və **Service-Oriented Architecture** prinsi
 - **Məlumat Saxlanılması:** Verilənlər bazası olaraq JSON formatlı fayl sistemindən istifadə olunub. Bu, layihənin portativliyini və sürətini təmin edir.
 - **Sessiya İdarəetməsi:** `HttpContext.Session` vasitəsilə rol-əsaslı (Admin/User) avtorizasiya sistemi qurulmuşdur.
 
-## 🛠 Texnologiyalar
+## 🛠 Texnologiyalar və Alətlər
 
-- **Backend:** C#, ASP.NET Core MVC
-- **Frontend:** Bootstrap 5, Bootstrap Icons, HTML5, CSS3
-- **Data:** JSON Serialization (System.Text.Json)
-- **Tooling:** Visual Studio 2022, .NET SDK 6.0+
+- **Backend:** C# 14 / 15, ASP.NET Core MVC 10.0
+- **Frontend:** Bootstrap 5.3, Bootstrap Icons
+- **Data Storage:** JSON (System.Text.Json)
+- **Tooling:** Visual Studio 2026 Professional
+- **Framework:** .NET SDK 10.0.100
