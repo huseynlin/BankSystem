@@ -1,37 +1,38 @@
-# 🏦 ASP.NET Core MVC - Professional Bank Management System
+# 🏦 ASP.NET Core MVC - NextGen Banking System (v10.0)
 
-![C#](https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white)
-![ASP.NET Core](https://img.shields.io/badge/ASP.NET%20Core-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)
-![Bootstrap](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white)
-![JSON Storage](https://img.shields.io/badge/Database-JSON-orange?style=for-the-badge&logo=json&logoColor=white)
+![C#](https://img.shields.io/badge/C%23-15.0-239120?style=for-the-badge&logo=c-sharp&logoColor=white)
+![.NET Core](https://img.shields.io/badge/.NET-10.0-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)
+![SQL](https://img.shields.io/badge/Database-SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white)
+![Visual Studio](https://img.shields.io/badge/Visual_Studio-2026-5C2D91?style=for-the-badge&logo=visual-studio&logoColor=white)
 
-Bu tətbiq, müasir bankçılıq infrastrukturunu simulyasiya edən, dinamik valyuta konvertasiyası mühərrikinə və ətraflı admin idarəetmə panelinə sahib olan **ASP.NET Core MVC** layihəsidir. 
+Bu layihə, müasir bankçılıq infrastrukturunu simulyasiya edən, **Entity Framework Core** üzərində qurulmuş və dinamik valyuta mühərrikinə sahib olan professional bank idarəetmə sistemidir.
 
-## 🌟 Əsas Özəlliklər
+## 🚀 Layihənin Öndə Çıxan Özəllikləri
 
-### 👨‍💼 Admin Portalı
-- **İstifadəçi İdarəetməsi:** Yeni istifadəçilərin yaradılması (Email unikal yoxlaması ilə), redaktə edilməsi və silinməsi.
-- **Təhlükəsizlik:** İstifadəçilərin anlıq olaraq bloklanması və girişinin məhdudlaşdırılması.
-- **Hesab Menecmenti:** Müştərilər üçün müxtəlif valyutalarda (AZN, USD, EUR, RUB) yeni bank hesablarının (IBAN simulyasiyası) açılması.
-- **Canlı Məzənnə Tənzimlənməsi:** Valyuta məzənnələrinin admin tərəfindən real vaxtda yenilənməsi.
+### 💎 Ağıllı Valyuta Sistemi
+* **Dinamik Konvertasiya:** Admin tərəfindən müəyyən edilən canlı məzənnələr əsasında AZN, USD, EUR və RUB arasında çarpaz köçürmələr.
+* **Avtomatik Hesablama:** Köçürmə zamanı mənbə və hədəf valyutaları fərqli olduqda, sistem avtomatik olaraq məbləği əsas valyuta (AZN) üzərindən hesablayır.
 
-### 👤 Müştəri Paneli
-- **Balans İzləmə:** Bütün bank hesablarının və qalıqların tək bir ekranda izlənilməsi.
-- **Ağıllı Transfer:** Çarpaz valyuta dəstəyi ilə daxili köçürmələr (Məsələn: USD hesabından AZN hesabına avtomatik konvertasiya ilə pul göndərmə).
-- **Profil İdarəetməsi:** Şəxsi məlumatların və sessiyanın idarə olunması.
+### 🛡️ Admin və Nəzarət Paneli
+* **İstifadəçi Menecmenti:** Yeni müştəri yaratma, məlumatların redaktəsi və tam silinməsi.
+* **Təhlükəsizlik:** Role-based Authorization (Admin/Customer) və istifadəçilərin anlıq olaraq bloklanması sistemi.
+* **Fərdi Tarixçə:** Hər bir istifadəçinin köçürmə tarixçəsinə (Mədaxil/Məxaric) fərdi nəzarət imkanı.
 
-## 🧠 Texniki Memarlıq
+### 📊 Müştəri Portalı (UX Focus)
+* **Bank Kartı Simulyasiyası:** Hesabların vizual olaraq bank kartı formasında göstərilməsi.
+* **Əməliyyat Tarixçəsi:** Son 10 əməliyyatın (Mədaxil - Yaşıl / Məxaric - Qırmızı) rəngli indikatorlarla izlənilməsi.
+* **Blok Sistemi:** Bloklanmış istifadəçilərin sistemə girişinin avtomatik məhdudlaşdırılması.
 
-Layihədə **Dependency Injection** və **Service-Oriented Architecture** prinsipləri tətbiq olunmuşdur.
+## 🛠 Texnoloji Stack
 
-- **Dinamik Konvertasiya:** Transferlər zamanı bütün hesablamalar bankın əsas valyutası (AZN) üzərindən `InvariantCulture` dəstəyi ilə aparılır. Bu, nöqtə/vergül xətalarının qarşısını alır.
-- **Məlumat Saxlanılması:** Verilənlər bazası olaraq JSON formatlı fayl sistemindən istifadə olunub. Bu, layihənin portativliyini və sürətini təmin edir.
-- **Sessiya İdarəetməsi:** `HttpContext.Session` vasitəsilə rol-əsaslı (Admin/User) avtorizasiya sistemi qurulmuşdur.
+- **Backend:** C# 15, ASP.NET Core MVC 10.0 (Latest Release)
+- **Database:** SQLite (Relational DB) via Entity Framework Core
+- **Arxitektura:** Service-Oriented Architecture (BankDataService)
+- **Data Protection:** Session-based authentication & context-aware data seeding
+- **UI:** Bootstrap 5.3, Bootstrap Icons, Custom CSS3 Animations
 
-## 🛠 Texnologiyalar və Alətlər
+## 🧠 Texniki Detallar (Müəllim üçün qeyd)
 
-- **Backend:** C# 14 / 15, ASP.NET Core MVC 10.0
-- **Frontend:** Bootstrap 5.3, Bootstrap Icons
-- **Data Storage:** JSON (System.Text.Json)
-- **Tooling:** Visual Studio 2026 Professional
-- **Framework:** .NET SDK 10.0.100
+1.  **EF Core Migration:** Layihədə `InitialCreate` miqrasiyası ilə bazanın SQL-ə keçidi təmin edilib.
+2.  **Data Seeding:** Proqram ilk dəfə işə düşəndə bazanı avtomatik olaraq 1 Admin və 3 Test İstifadəçisi ilə doldurur.
+3.  **InvariantCulture:** Bütün riyazi hesablamalar `CultureInfo.InvariantCulture` ilə aparılır ki, bu da onluq kəsrlərdə (nöqtə/vergül) səhvlərin qarşısını alır.
