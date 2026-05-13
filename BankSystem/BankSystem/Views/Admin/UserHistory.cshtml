@@ -1,0 +1,49 @@
+﻿@model List<BankSystem.Models.Transaction>
+@{
+    ViewData["Title"] = "İstifadəçi Tarixçəsi";
+}
+
+<div class="container mt-4">
+    <div class="card border-0 shadow-sm p-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h3><i class="bi bi-clock-history text-primary"></i> @ViewBag.TargetUser - Əməliyyat Tarixçəsi</h3>
+            <a asp-action="Index" class="btn btn-outline-secondary btn-sm">
+                <i class="bi bi-arrow-left"></i> Geri Qayıt
+            </a>
+        </div>
+
+        @if (Model != null && Model.Any())
+        {
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Tarix</th>
+                            <th>Mənbə (Çıxan)</th>
+                            <th>Hədəf (Mədaxil)</th>
+                            <th>Məbləğ</th>
+                            <th>Təsvir</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var tr in Model)
+                        {
+                            <tr>
+                                <td class="small">@tr.TransactionDate.ToString("dd.MM.yyyy HH:mm")</td>
+                                <td><span class="badge bg-danger bg-opacity-10 text-danger border border-danger border-opacity-25 px-3">@tr.FromAccountNumber</span></td>
+                                <td><span class="badge bg-success bg-opacity-10 text-success border border-success border-opacity-25 px-3">@tr.ToAccountNumber</span></td>
+                                <td class="fw-bold">@tr.Amount.ToString("N2") @tr.Currency</td>
+                                <td class="small text-muted">@tr.Description</td>
+                                <td>
+                                    <span class="badge bg-success text-white px-2">Uğurlu</span>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else { /* Boş tarixçə mesajı */ }
+    </div>
+</div>

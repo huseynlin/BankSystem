@@ -1,0 +1,124 @@
+﻿@model List<BankSystem.Models.Account>
+@{
+    ViewData["Title"] = "Müştəri Paneli";
+    var history = ViewBag.History as List<BankSystem.Models.Transaction>;
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-7">
+            <h4 class="mb-4"><i class="bi bi-wallet2 text-primary"></i> Hesablarım</h4>
+            @foreach (var acc in Model)
+            {
+                <div class="card mb-3 border-0 shadow-sm" style="background: linear-gradient(135deg, #004a99, #007bff); color: white; border-radius: 15px;">
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between">
+                            <span>@acc.AccountNumber</span>
+                            <i class="bi bi-chip fs-2"></i>
+                        </div>
+                        <h2 class="mt-3">@acc.Balance.ToString("N2") @acc.Currency</h2>
+                        <p class="mb-0 opacity-75">Cari Balans</p>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="col-md-5">
+            <div class="card border-0 shadow-sm" style="border-radius: 15px;">
+                <div class="card-body p-4">
+                    <h4 class="card-title mb-4"><i class="bi bi-send text-success"></i> Sürətli Köçürmə</h4>
+                    @if (TempData["Success"] != null)
+                    {
+                        <div class="alert alert-success">@TempData["Success"]</div>
+                    }
+                    @if (TempData["Error"] != null)
+                    {
+                        <div class="alert alert-danger">@TempData["Error"]</div>
+                    }
+
+                    <form asp-action="Transfer" method="post">
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold">Mənbə Hesab</label>
+                            <select name="fromAcc" class="form-select border-0 bg-light">
+                                @foreach (var acc in Model)
+                                {
+                                    <option value="@acc.AccountNumber">@acc.AccountNumber (@acc.Balance @acc.Currency)</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold">Qəbul edənin Hesab No</label>
+                            <input type="text" name="toAcc" class="form-control border-0 bg-light" placeholder="AZXXXX" required />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold">Məbləğ və Valyuta</label>
+                            <div class="input-group">
+                                <input type="number" name="amount" step="0.01" class="form-control border-0 bg-light w-50" placeholder="0.00" required />
+                                <select name="targetCurrency" class="form-select border-0 bg-secondary text-white" style="max-width: 100px;">
+                                    <option value="AZN">AZN</option>
+                                    <option value="USD">USD</option>
+                                    <option value="EUR">EUR</option>
+                                    <option value="RUB">RUB</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 py-2 shadow-sm" style="border-radius: 10px;">İndi Köçür</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm" style="border-radius: 15px;">
+                <div class="card-body p-4">
+                    <h4 class="mb-4"><i class="bi bi-clock-history text-warning"></i> Son Əməliyyatlar</h4>
+                    @if (history != null && history.Any())
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Tarix</th>
+                                        <th>Hesab / Əməliyyat</th>
+                                        <th>Məbləğ</th>
+                                        <th>Növ</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var tr in history)
+                                    {
+                                        var isIncoming = Model.Any(a => a.AccountNumber == tr.ToAccountNumber);
+                                        <tr>
+                                            <td class="small text-muted">@tr.TransactionDate.ToString("dd.MM.yyyy HH:mm")</td>
+                                            <td>
+                                                <span class="fw-bold">@(isIncoming ? tr.FromAccountNumber : tr.ToAccountNumber)</span>
+                                                <br /><small class="text-muted">@(isIncoming ? "Göndərən" : "Alan")</small>
+                                            </td>
+                                            <td>
+                                                <span class="fw-bold @(isIncoming ? "text-success" : "text-danger")">
+                                                    @(isIncoming ? "+" : "-")@tr.Amount.ToString("N2") @tr.Currency
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span class="badge @(isIncoming ? "bg-success" : "bg-danger") px-3">
+                                                    @(isIncoming ? "Mədaxil" : "Məxaric")
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span class="text-success fw-bold"><i class="bi bi-check-circle-fill"></i> Uğurlu</span>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else { /* Boş tarixçə mesajı */ }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
